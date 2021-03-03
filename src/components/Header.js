@@ -4,17 +4,14 @@ import Button from './Button'
 
 
 // rafce
-const Header = ({title}) => {
-    const onClick = () => {
-        console.log('click')
-    }
+const Header = ({title, onClick, showAddForm}) => {
 
     return (
         <header className='header'>
             <h1>{title}</h1>
             <Button 
                 onClick={onClick}
-                text='Add'
+                text= {!showAddForm ? 'Add' : 'Close'}
             />
         </header>
     )
