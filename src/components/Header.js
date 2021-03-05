@@ -1,18 +1,19 @@
 //impt
 import PropTypes from 'prop-types'
 import Button from './Button'
+import {useLocation} from 'react-router-dom'
 
 
 // rafce
 const Header = ({title, onClick, showAddForm}) => {
-
+    const location = useLocation()
     return (
         <header className='header'>
             <h1>{title}</h1>
-            <Button 
+            {location.pathname === '/' && <Button 
                 onClick={onClick}
                 text= {!showAddForm ? 'Add' : 'Close'}
-            />
+            />}
         </header>
     )
 }

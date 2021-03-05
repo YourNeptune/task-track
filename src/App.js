@@ -1,7 +1,10 @@
 import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
+import Footer from './components/Footer'
+import About from './components/About'
 import {useState, useEffect} from 'react'
+import {BrowserRouter, Route} from 'react-router-dom'
 
 function App() {
   const [showAddForm, setShowAddFrom] = useState(false)
@@ -65,23 +68,32 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <BrowserRouter>
+      <div className="container">
       <Header 
         showAddForm={showAddForm}
         onClick={() => {
           setShowAddFrom(!showAddForm)
         }}
       />
-      {showAddForm && <AddTask onAdd={addTask}/>}
-      {
-        tasks.length > 0 ?
-        <Tasks 
-          tasks={tasks}
-          onDelete={deleteTask}
-          onToggle={toggleReminder}
-        /> : 'No Tasks'
-      }
+      
+      <Route path='/' exact render={(props) => (
+        <>
+          {showAddForm && <AddTask onAdd={addTask}/>}
+          {
+            tasks.length > 0 ?
+            <Tasks 
+              tasks={tasks}
+              onDelete={deleteTask}
+              onToggle={toggleReminder}
+            /> : 'No Tasks'
+          }
+        </>
+      )}/>
+      <Route path='/about' component={About} />
+      <Footer />
     </div>
+    </BrowserRouter>
    
   );
 }
